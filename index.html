@@ -4,7 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" id="viewport-meta">
-  <title>Document</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images//favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+  <link rel="manifest" href="./images/site.webmanifest">
+  <link rel="mask-icon" href="./images/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>SPEAK FREE – твій шлях до володіння чеською та англійською!</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +31,7 @@
   <header class="header">
     <div class="container">
       <div class="header-content d-flex align-center">
-        <a href="/" class="logo-link">SPEAK FREE </a>
+        <a href="/" class="logo-link">SPEAK <br> FREE </a>
         <nav class="header-nav d-flex">
           <a href="#home" class="header-nav-item">Головна</a>
           <a href="#who-can-benefit" class="header-nav-item">Кому підійде</a>
@@ -223,7 +230,7 @@
         <div class="d-flex width-50">
           <form class="form-content d-flex flex-column align-center width-100" id="main-form">
             <p class="form-title">Придбати курс</p>
-            <input type="text" class="form-input name" name="name" placeholder="Ім'я" autocomplete="on" />
+            <input type="text" class="form-input name success" name="name" placeholder="Ім'я" autocomplete="on" />
             <input type="text" class="form-input surname" name="surname" placeholder="Прізвище" autocomplete="on" />
             <input type="email" class="form-input email" name="email" placeholder="Email" autocomplete="on" />
             <input type="tel" class="form-input phone" name="phone" placeholder="Телефон" id="phone"
@@ -236,26 +243,37 @@
               <option value="650">1 індивідуальне заняття</option>
               <option value="4500">8 індивідуальних занять</option>
             </select>
-            <button class="button" disabled type="button" id="submit-btn" onclick="pay()">Записатись</button>
+            <label class="custom-checkbox d-flex align-center width-100" for="personal_data_consent">
+              <input type="checkbox" name="personal_data_consent" id="personal_data_consent">
+              <span>Я згоден(a) на обробку персональних даних</span>
+            </label>
+            <label class="custom-checkbox d-flex align-center width-100" for="accept_offer_agreement">
+              <input type="checkbox" name="accept_offer_agreement" id="accept_offer_agreement">
+              <span>Я принимаю условия договора оферты</span>
+            </label>
+            <button class="button" disabled type="submit" id="submit-btn">Записатись</button>
           </form>
         </div>
     </section>
   </main>
   <footer class="footer d-flex">
     <div class="container d-flex flex-column">
-      <div class="d-flex width-100 align-center justify-start footer-items">
+      <div class="d-flex width-100 align-center justify-start footer-items footer-top">
         <div class="d-flex align-center footer-item">
           <img src="./images/spot.svg" />
-          <p>OSWALD, New South Wales(NSW), 2321</p>
+          <a href="" class="footer-link">V pitkovičkách 11, Praha 10</a>
         </div>
         <div class="d-flex align-center footer-item">
           <img src="./images/phone.svg" />
-          <p>(02)4955 3474</p>
+          <a href="tel:+420606912017" class="footer-link">+420 606-912-017</a>
         </div>
         <div class="d-flex align-center footer-item">
           <img src="./images/email.svg" />
-          <p>info@thera.com</p>
+          <a href="mailto:speak.free.cz@gmail.com" class="footer-link">speak.free.cz@gmail.com</a>
         </div>
+      </div>
+      <div class="d-flex width-100 align-center justify-start footer-bottom">
+        <p>Diana Zabavina IČO 21313164</p>
       </div>
     </div>
   </footer>
@@ -269,39 +287,5 @@
   src="https://secure.wayforpay.com/server/pay-widget.js"></script>
 <script src="./script.js"></script>
 
-
-<script type="text/javascript">
-  var wayforpay = new Wayforpay()
-  var pay = function () {
-    wayforpay.run({
-      merchantAccount: "englishcampwithdi_com",
-      merchantDomainName: "englishcampwithdi.com",
-      authorizationType: "SimpleSignature",
-      merchantSignature: "2a4d0453a88a0b071b73493c44f6cfa667dbf0b5",
-      orderReference: "DH783023",
-      orderDate: "1415379863",
-      amount: "1547.36",
-      currency: "UAH",
-      productName: "Процессор Intel Core i5-4670 3.4GHz",
-      productPrice: "1000",
-      productCount: "1",
-      clientFirstName: "Вася",
-      clientLastName: "Васечкин",
-      clientEmail: "some@mail.com",
-      clientPhone: "380631234567",
-      language: "UA"
-    },
-      function (response) {
-        // on approved				 			
-      },
-      function (response) {
-        // on declined 			
-      },
-      function (response) {
-        // on pending or in processing 			
-      }
-    )
-  }
-</script>
 
 </html>

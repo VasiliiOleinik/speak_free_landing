@@ -222,6 +222,7 @@ body {
   font-weight: 700;
   font-size: 24px;
   font-style: italic;
+  transform: skewX(-15deg);
 }
 
 .main-screen {
@@ -479,6 +480,21 @@ body {
   outline: none;
   box-sizing: border-box;
   height: 50px;
+  transition: var(--default-transition);
+}
+
+.form .form-input:focus {
+  box-shadow: rgb(245 24 135 / 30%) 0px 4px 20px 0px;
+}
+
+.form .form-input.success {
+  box-shadow: rgb(76 175 80 / 30%) 0px 4px 20px 0px;
+}
+
+.form .form-input.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .form .iti--allow-dropdown {
@@ -494,6 +510,31 @@ body {
 
 .footer .footer-items {
   gap: 15px;
+}
+
+.footer .footer-item .footer-link {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: var(--default-transition);
+}
+
+.footer .footer-item .footer-link:hover {
+  color: var(--color-pink);
+}
+
+.footer .footer-top {
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.footer .footer-bottom {
+  padding-top: 15px;
+}
+
+.footer .footer-bottom p {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .footer .footer-item img {
@@ -531,6 +572,11 @@ body {
 
 .carousel-container img {
   height: 150px;
+}
+
+.custom-checkbox {
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 
 @media (max-width: 1199px) {
@@ -672,5 +718,29 @@ body {
 
   .our-mission .width-40 {
     width: 100%;
+  }
+
+  .form .form-content {
+    padding: 20px;
+  }
+}
+
+
+@media (max-width: 475px) {
+  .link-button {
+    padding: 10px 15px;
+    font-size: 16px;
+  }
+
+  .logo-link {
+    font-size: 20px;
+  }
+
+  .language {
+    font-size: 14px;
+  }
+
+  .languages {
+    margin-right: 15px;
   }
 }

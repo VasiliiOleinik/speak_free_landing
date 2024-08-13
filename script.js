@@ -79,15 +79,30 @@ $(phoneInput).trigger('countrychange')
   })
 
    // Function to check if all fields are filled
-   function validateForm() {
-    let isValid = true
+  function validateForm() {
+    let isValid = true;
+  
+    // Validate inputs with class 'form-input'
     $('#main-form .form-input').each(function () {
       if ($(this).val() === '') {
-        isValid = false
-        return false // Break out of the loop
+        isValid = false;
+        $(this).removeClass('success');
+        return false; // Break out of the loop
       }
-    })
-    return isValid
+      $(this).addClass('success');
+    });
+     
+  // Validate checkboxes separately
+  $('#main-form input[type="checkbox"]').each(function () {
+    if (!$(this).is(':checked')) {
+      isValid = false;
+      $(this).removeClass('success');
+      return false; // Break out of the loop
+    }
+    $(this).addClass('success');
+  });
+
+  return isValid;
    }
   
   const plans = {
@@ -119,12 +134,62 @@ $(phoneInput).trigger('countrychange')
     }
   })
 
+  $('#personal_data_consent').on('change', function () {
+    if (validateForm()) {
+      $('#submit-btn').prop('disabled', false);
+    } else {
+      $('#submit-btn').prop('disabled', true);
+    }
+  });
+
+  $('#accept_offer_agreement').on('change', function () {
+    if (validateForm()) {
+      $('#submit-btn').prop('disabled', false);
+    } else {
+      $('#submit-btn').prop('disabled', true);
+    }
+  });
+
   // Initial validation check
   if (validateForm()) {
     $('#submit-btn').prop('disabled', false)
   } else {
     $('#submit-btn').prop('disabled', true)
   }
+
+  // Way for pay
+    var wayforpay = new Wayforpay()
+    var pay = function () {
+      wayforpay.run({
+        merchantAccount: "englishcampwithdi_com",
+        merchantDomainName: "englishcampwithdi.com",
+        authorizationType: "SimpleSignature",
+        merchantSignature: "2a4d0453a88a0b071b73493c44f6cfa667dbf0b5",
+        orderReference: "DH783023",
+        orderDate: "1415379863",
+        amount: "1547.36",
+        currency: "UAH",
+        productName: "Процессор Intel Core i5-4670 3.4GHz",
+        productPrice: "1000",
+        productCount: "1",
+        clientFirstName: "Вася",
+        clientLastName: "Васечкин",
+        clientEmail: "some@mail.com",
+        clientPhone: "380631234567",
+        language: "UA"
+      },
+        function (response) {
+          // on approved				 			
+        },
+        function (response) {
+          // on declined 			
+        },
+        function (response) {
+          // on pending or in processing 			
+        }
+      )
+    }
+
 
   // Form submission event
   $('#main-form').on('submit', function (event) {
@@ -143,7 +208,22 @@ $(phoneInput).trigger('countrychange')
     }
 
     const formValues = getFormValues()
-    console.log('formValues',formValues)
+    formValues["status"] = "Pending Payment"
+    formValues["plan"] = plans[formValues["plan"]]
+    
+      $.ajax({
+        type: 'POST',
+        url: './mailer.php',
+        data: formValues,
+        success: function (response) {
+          pay()
+        },
+        error: function(xhr, status, error) {
+          console.error('xhr', xhr);
+          console.error('status', status);
+          console.error('error', error)
+        }
+      });
   })
 
   $('.owl-carousel').owlCarousel({
